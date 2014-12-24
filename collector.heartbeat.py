@@ -496,8 +496,8 @@ def main ():
   finally:
       final_time = datetime.now()
       delta = final_time - start_time
-      log.debug('Finalizing program at: %s\tTotal duration: %s.%s sec' 
-          % (final_time.strftime(dateformat), delta.seconds, delta.microseconds))
+      log.debug('Finalizing program at: %s\t# hosts: %i\tTotal duration: %s.%s sec' 
+          % (final_time.strftime(dateformat), len(host_list), delta.seconds, delta.microseconds))
 
 if __name__ == "__main__":
   main()

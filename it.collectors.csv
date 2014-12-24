@@ -36,7 +36,7 @@ sfm0sednrlwp005,10.1.45.199,san francisco,sfm0sednrlwp005*,windows,vm
 sfm0sednrlwp006,10.1.45.247,san francisco,sfm0sednrlwp006*,windows,vm
 sfo5sednlrwp001,10.10.4.15,san francisco,sfo5sednlrwp001*,windows,vm
 smt0sednrlwp001,10.8.11.21,san mateo,smt0sednrlwp001*,windows,vm
-smt0sednrllp001,10.8.11.22,san mateo,smt0sednrllp001,linux,vm
+smt0sednrllp001,10.8.11.15,san mateo,smt0sednrllp001,linux,vm
 smo-arc-agt-wp1,10.16.11.5,santa monica,smo-arc-agt-wp1*,windows,legacy
 sea-arcagt1,10.22.11.5,seattle,sea-arcagt1*,windows,legacy
 sin-arc-agt-wp1,10.200.11.15,singapore,sin-arc-agt-wp1*,windows,legacy
