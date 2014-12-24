@@ -13,7 +13,6 @@ frd-arcagt-wp1,10.72.67.15,fredricton,frd-arcagt-wp1*,windows,legacy
 hfx-arcagt-wp1,10.72.4.15,halifax,hfx-arcagt-wp1*,windows,legacy
 hrn-arcagt-wp1,10.23.11.7,herndon,hrn-arcagt-wp1*,windows,legacy
 hyd-arcagt-wp1,10.204.4.15,hyderabad,hyd-arcagt-wp1*,windows,legacy
-vac-arcagt-wp1,10.126.4.15,legacy,vac-arcagt-wp1*,windows,legacy
 lons-arc-agt-wp1,10.133.11.15,london surburbia,lons-arc-agt-wp1*,windows,legacy
 lon2-arcagt-wp1,10.134.4.15,london,lon2-arcagt-wp1*,windows,legacy
 mel1-arcagt-wp1,10.194.68.15,melbourne,mel1-arcagt-wp1*,windows,legacy
@@ -51,4 +50,4 @@ tlv-arcagt-wp1,10.150.36.15,tel aviv,tlv-arcagt-wp1*,windows,legacy
 tok1-arcagt-wp1,10.194.4.15,tokyo,tok1-arcagt-wp1*,windows,legacy
 tor-dnr-log-wp1,10.85.11.15,toronto,tor-dnr-log-wp1*,windows,vm
 arcsight-tor,10.85.11.15,toronto,tor-dnr-log-wp1*,windows,vm
-hcanivel-wsm,10.1.145.34,sfm,hcanivel-wsm*,mac,vm
+vac-arcagt-wp1,10.126.4.15,vancouver,vac-arcagt-wp1*,windows,legacy
