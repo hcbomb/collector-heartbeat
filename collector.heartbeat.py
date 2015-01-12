@@ -434,6 +434,7 @@ def sendHeartbeats(hosts):
         subprocess.check_call(cmd, shell=True)
 
       except subprocess.CalledProcessError, c:
+        log.debug('%s failed log server: %s' % (attempt_date, hostname))
 
         # return code non-zero, something is wrong
         if c.returncode > 0:
