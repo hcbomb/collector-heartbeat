@@ -96,7 +96,7 @@ def init_handlers():
                     fromaddr=email_dest,
                     toaddrs=email_dest,
                     subject=email_subj)
-  eh.setLevel(logging.INFO)
+  eh.setLevel(logging.ERROR)
 
   # syslog
   sh = logging.handlers.SysLogHandler(address=(syslog_server, syslog_port), facility=logging.handlers.SysLogHandler.LOG_NOTICE)
@@ -251,8 +251,19 @@ def check_monitor_status(host, time_str):
       log.info('updating for host %s earliest: %s latest: %s counter: %s' % 
         (host, mfg.get(host, 'earliest'), time.strftime(dateformat), str(counter)))
 
-      # alert
-      if counter == threshold:
+      # set alert flag
+      alert_flag = False
+
+      if mfg.has_option(host, 'alert'):
+        try:
+          alert_flag = mfg.getboolean(host, 'alert')
+        except ValueError:
+          alert_flag = False
+        except Exception, e:
+          log.error('Failed getting alert value for host: %s. Exception: %r' % (host, repr(e)))
+
+      # alert if reach threshold
+      if counter == threshold or (not alert_flag and counter > threshold):
         log.debug('alert threshold hit for host: %s counter: %s' % (str(host), str(counter)))
         return '%s cannot connect to host (%s)' % (time.strftime(dateformat), str(host))
 
@@ -261,6 +272,11 @@ def check_monitor_status(host, time_str):
       # clear latest timestamp, counter
       mfg.set(host, 'latest', '')
       mfg.set(host, 'counter', str(1))
+      # remove alert flag if set/exists
+      try:
+        mfg.remove_option(host, 'alert')
+      except NoSectionError:
+        pass
 
       # just in case, check delta for latest time as well
       # NOTICE: we're importing datetime from datetime (not root library)
@@ -274,7 +290,7 @@ def check_monitor_status(host, time_str):
       log.info('resetting for host %s earliest: %s latest: NULL counter: %s' % (host, time.strftime(dateformat), str(counter)))
 
   except Exception, e:
-    log.error('Failed checking monitor status for host: %s' % host)
+    log.error('Failed checking monitor status for host: %s. Exception: %r' % (host, repr(e)))
   finally:
     with open(monitor_file, 'wb') as mfg_filename:
       mfg.write(mfg_filename)
@@ -375,7 +391,16 @@ def sendAlert(host_errors, warnings):
 
   if len(errors) > 0:
     error_body = warning_body + 'Errors:\n' + '\n'.join(errors) + '\n\n\tTotal failed hosts: ' + str(error_count)
-    log.error(error_body)
+    try:
+      log.error(error_body)
+
+      # update alert flag for hosts
+      for ahost in host_errors:
+        mfg.set(ahost['hostname'], 'alert', 'True')
+      with open(monitor_file, 'wb') as mfg_filename:
+        mfg.write(mfg_filename)
+    except Exception, e:
+      log.error('Cannot send alert error(s). Exception: %r' %(repr(e)))
   elif warning_count > 0:
     log.info(warnings)
 
