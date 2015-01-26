@@ -2,7 +2,7 @@
 
 file=$1
 body=
-email=hcanivel@salesforce.com
+email=<email>
 
 for i in $(tail -n +2 $file | cut -d, -f2); do
   nc -w0 -u $i 514 <<< "<46>$(date +'%m-%d-%YT%H:%M:%S') $(hostname) COLLECTOR HEARTBEAT TEST"
