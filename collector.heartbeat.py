@@ -308,7 +308,7 @@ def check_monitor_status(host, time_str):
     input: host_list = array of dict tuple: ip, collector (hostname)
 '''
 def validate_monitor(host_list):
-  global mfg, monitor_file
+  global mfg, monitor_file, file_name
 
   try:
     log_folder = base_config['base'].get('folder')
